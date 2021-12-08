@@ -24,9 +24,10 @@ public class UdpServer {
 
             datagramSocket.receive(datagramPacket);
 
-            String context = new String(datagramPacket.getData());
+            String context = new String(datagramPacket.getData(), 0, datagramPacket.getLength());
 
             System.out.println("输入内容为：" + context);
+
 
             if("bye".equals(context.trim())){
                 System.out.println("断开链接");
@@ -38,6 +39,7 @@ public class UdpServer {
 
         // 初级版
         /*DatagramSocket datagramSocket = new DatagramSocket(8888);
+
 
         byte[] bytes = new byte[1024];
         DatagramPacket datagramPacket = new DatagramPacket(bytes,0,bytes.length);

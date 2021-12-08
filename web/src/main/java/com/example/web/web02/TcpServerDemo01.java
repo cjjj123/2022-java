@@ -3,11 +3,11 @@ package com.example.web.web02;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
+ * 服务器
  * xiangjiaoyun
  * author:chenjianjie
  * Date:2021/12/6
@@ -25,19 +25,19 @@ public class TcpServerDemo01 {
             // 建立连接
             serverSocket = new ServerSocket(9999);
 
-            accept = serverSocket.accept();
+            while (true){
+                accept = serverSocket.accept();
 
-            inputStream = accept.getInputStream();
+                inputStream = accept.getInputStream();
 
-            byteArrayOutputStream = new ByteArrayOutputStream();
-            byte[] bytes = new byte[1024];
-            int len = 0;
-            while((len = inputStream.read(bytes)) != -1){
-                byteArrayOutputStream.write(bytes, 0, len);
+                byteArrayOutputStream = new ByteArrayOutputStream();
+                byte[] bytes = new byte[1024];
+                int len = 0;
+                while((len = inputStream.read(bytes)) != -1){
+                    byteArrayOutputStream.write(bytes, 0, len);
+                }
+                System.out.println(byteArrayOutputStream.toString());
             }
-            System.out.println(byteArrayOutputStream.toString());
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }finally {

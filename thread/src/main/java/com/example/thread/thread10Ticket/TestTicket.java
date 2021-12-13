@@ -25,16 +25,19 @@ public class TestTicket implements Runnable {
     }
 
     public void buy(){
-        if(ticketNum <= 0){
-            flag = false;
-            return;
+        synchronized (this){
+            if(ticketNum <= 0){
+                flag = false;
+                return;
+            }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + "拿到了第" + ticketNum-- + "张票");
         }
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(Thread.currentThread().getName() + "拿到了第" + ticketNum-- + "张票");
+
     }
 
 }

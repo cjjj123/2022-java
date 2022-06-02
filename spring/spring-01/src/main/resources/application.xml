@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--使用spring来创建对象-->
+    <!--构造器注入-->
+    <!--<bean id="hello" class="com.cjj.pojo.Hello">
+        &lt;!&ndash;1、下标注入&ndash;&gt;
+        <constructor-arg index="0" value="sai01"></constructor-arg>
+        &lt;!&ndash;2、类型注入,若多个相同类型参数，不建议使用&ndash;&gt;
+        &lt;!&ndash;<constructor-arg type="java.lang.String" value="sai02"></constructor-arg>&ndash;&gt;
+        &lt;!&ndash;3、直接通过参数名注入&ndash;&gt;
+        &lt;!&ndash;<constructor-arg name="str" value="sai03"></constructor-arg>&ndash;&gt;
+    </bean>-->
+
+    <!--p命名空间，简单注入值-->
+    <!--<bean id="hello1" class="com.cjj.pojo.Hello" p:str="sai" c:str="haha"></bean>-->
+
+    <!--c命名空间，构造器注入值-->
+    <bean id="hello" class="com.cjj.pojo.Hello" c:str="haha" scope="prototype"></bean>
+
+</beans>

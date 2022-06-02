@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.cjj.*"/>
+
+    <bean id="userService" class="com.cjj.service.UserServiceImpl"/>
+    <bean id="log" class="com.cjj.log.Log"></bean>
+    <bean id="afterLog" class="com.cjj.log.AfterLog"></bean>
+
+    <!--方式一：使用原生的spring api接口-->
+    <!--配置aop-->
+    <aop:config>
+        <!--切入点 expression：表达式，execution：要执行的位置（修饰词，返回值，列名，方法名，参数）-->
+        <aop:pointcut id="pointcut" expression="execution(* com.cjj.service.UserServiceImpl.*(..))"/>
+        <!--通知-->
+        <aop:advisor advice-ref="log" pointcut-ref="pointcut"></aop:advisor>
+        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"></aop:advisor>
+    </aop:config>
+
+    <!--方法二：自定义类-->
+    <bean id="diy" class="com.cjj.diy.DiyPointCut"></bean>
+    <aop:config>
+        <!--切面 ref引用自定义的类-->
+        <aop:aspect ref="diy">
+            <!--切入点-->
+            <aop:pointcut id="point" expression="execution(* com.cjj.service.UserServiceImpl.*(..))"></aop:pointcut>
+            <aop:before method="before" pointcut-ref="point"></aop:before>
+            <aop:after method="after" pointcut-ref="point"></aop:after>
+        </aop:aspect>
+    </aop:config>
+
+
+    <!--方法三：注解实现-->
+    <!--开启注解支持-->
+    <aop:aspectj-autoproxy/>
+
+
+</beans>

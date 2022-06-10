@@ -19,4 +19,18 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <!--拦截器配置-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--包括这个请求下面的所有请求 /admin/shop/user-->
+            <!--/** 相当于所有请求-->
+            <mvc:mapping path="/**"/>
+            <bean class="com.cjj.config.MyInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
+
+
 </beans>

@@ -1,0 +1,6 @@
+person:
+  name: "哈哈"
+  phone: "521114"
+spring:
+  profiles:
+    active: test
